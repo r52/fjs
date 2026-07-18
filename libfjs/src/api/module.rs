@@ -23,6 +23,7 @@
 
 use crate::api::source::JsBuiltinOptions;
 use crate::bytecode_support::load_module_bytecode_checked;
+pub use fjs_native_extensions::NativeExtension;
 use flutter_rust_bridge::frb;
 use llrt_utils::module::ModuleInfo;
 use rquickjs::loader::{ImportAttributes, Loader, ModuleLoader, Resolver};
@@ -577,6 +578,26 @@ impl ModuleBuilder {
         self
     }
 
+    /// Adds a native extension to the builder.
+    ///
+    /// Native extensions can install host-provided globals into each JavaScript
+    /// context using the same attachment lifecycle as the built-in modules.
+    ///
+    /// # Parameters
+    ///
+    /// - `extension`: The native extension to add
+    ///
+    /// # Returns
+    ///
+    /// Returns self for method chaining.
+    pub fn with_native_extension(mut self, extension: NativeExtension) -> Self {
+        for init in extension.globals() {
+            self.global_attachment = self.global_attachment.add_function(*init);
+        }
+
+        self
+    }
+
     /// Builds the module system configuration.
     ///
     /// This method finalizes the configuration and returns the components
@@ -605,6 +626,9 @@ impl JsBuiltinOptions {
     #[frb(ignore)]
     pub fn to_module_builder(&self) -> ModuleBuilder {
         let mut builder = ModuleBuilder::new();
+        for extension in fjs_native_extensions::registered_native_extensions() {
+            builder = builder.with_native_extension(extension);
+        }
 
         if self.abort.unwrap_or(false) {
             builder = builder.with_global(llrt_abort::init);

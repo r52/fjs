@@ -53,6 +53,7 @@ llrt_json = { git = "https://github.com/awslabs/llrt", rev = "952fd20" }
 llrt_intl = { git = "https://github.com/awslabs/llrt", rev = "952fd20" }
 
 llrt_compression = { git = "https://github.com/awslabs/llrt", rev = "952fd20", default-features = false, features = ["brotli-c", "flate2-rust", "zstd-c"] }
+fjs_native_extensions = { git = "https://github.com/r52/fjs_native_extensions.git", branch = "main" }
 flate2 = { version = "1.1.8", default-features = false, features = ["zlib-rs"] }
 [features]
 default = []

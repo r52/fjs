@@ -27,7 +27,9 @@ pub mod value;
 pub use bytecode::JsBytecode;
 pub use engine::{JsEngine, JsEngineRuntimeOptions};
 pub use error::{JsError, JsResult};
-pub use module::{DynamicModuleLoader, DynamicModuleResolver, GlobalAttachment, ModuleBuilder};
+pub use module::{
+    DynamicModuleLoader, DynamicModuleResolver, GlobalAttachment, ModuleBuilder, NativeExtension,
+};
 pub use runtime::{JsAsyncContext, JsAsyncRuntime, JsContext, JsRuntime, MemoryUsage};
 pub use source::{
     JsBuiltinOptions, JsBytecodeEndianness, JsCode, JsEvalOptions, JsModule, JsModuleBytecode,
