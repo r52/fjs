@@ -209,6 +209,30 @@ async fn test_engine_create_owns_configured_runtime_and_context() {
 }
 
 #[tokio::test]
+async fn test_engine_native_image_png_data_url_helper() {
+    let engine = JsEngine::create(Some(JsBuiltinOptions::none()), None, None)
+        .await
+        .unwrap();
+
+    engine.init_without_bridge().await.unwrap();
+    let result = engine
+        .eval(
+            JsCode::Code(
+                "gagaku.nativeImage.encodePngDataUrl(new Uint8ClampedArray([255, 0, 0, 255]), 1, 1)"
+                    .to_string(),
+            ),
+            None,
+        )
+        .await
+        .unwrap();
+
+    let expected =
+        gagaku_fjs_native_module::encode_png_data_url_from_rgba(&[255, 0, 0, 255], 1, 1).unwrap();
+
+    assert!(matches!(result, JsValue::String(ref value) if value == &expected));
+}
+
+#[tokio::test]
 async fn test_engine_create_applies_runtime_options_before_init() {
     let engine = JsEngine::create(
         Some(JsBuiltinOptions::essential()),
