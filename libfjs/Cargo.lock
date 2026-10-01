@@ -280,6 +280,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
+name = "byteorder-lite"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8f1fe948ff07f4bd06c30984e69f5b4899c516a3ef74f34df92a2df2ab535495"
+
+[[package]]
 name = "bytes"
 version = "1.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -376,6 +382,12 @@ name = "cmov"
 version = "0.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c9ea0ac24bc397ab3c98583a3c9ba74fa56b09a4449bbe172b9b1ddb016027a"
+
+[[package]]
+name = "color_quant"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3d7b894f5411737b7867f4827955924d7c254fc9f4d91a6aad6b097804b1018b"
 
 [[package]]
 name = "console_error_panic_hook"
@@ -750,6 +762,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da7c62ceae207dd37ea5b845da6a0696c799f85e97da1ab5b7910be3c1c80223"
 
 [[package]]
+name = "fdeflate"
+version = "0.3.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e6853b52649d4ac5c0bd02320cddc5ba956bdb407c4b75a2c6b75bf51500f8c"
+dependencies = [
+ "simd-adler32",
+]
+
+[[package]]
 name = "ff"
 version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -780,6 +801,7 @@ dependencies = [
  "flate2",
  "flutter_rust_bridge",
  "futures",
+ "gagaku_fjs_native_module",
  "llrt_abort",
  "llrt_assert",
  "llrt_async_hooks",
@@ -998,6 +1020,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "gagaku_fjs_native_module"
+version = "0.2.0"
+source = "git+https://github.com/r52/gagaku_fjs_native_module.git?branch=main#1c5dddc84b2bf0172717f7bfee0006b31f888e0f"
+dependencies = [
+ "base64-simd",
+ "fjs_native_extensions",
+ "image",
+ "linkme",
+ "rquickjs",
+]
+
+[[package]]
 name = "generic-array"
 version = "0.14.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1028,6 +1062,16 @@ dependencies = [
  "libc",
  "r-efi",
  "rand_core",
+]
+
+[[package]]
+name = "gif"
+version = "0.14.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee8cfcc411d9adbbaba82fb72661cc1bcca13e8bba98b364e62b2dba8f960159"
+dependencies = [
+ "color_quant",
+ "weezl",
 ]
 
 [[package]]
@@ -1405,6 +1449,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "image"
+version = "0.25.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "85ab80394333c02fe689eaf900ab500fbd0c2213da414687ebf995a65d5a6104"
+dependencies = [
+ "bytemuck",
+ "byteorder-lite",
+ "color_quant",
+ "gif",
+ "image-webp",
+ "moxcms",
+ "num-traits",
+ "png",
+ "zune-core",
+ "zune-jpeg",
+]
+
+[[package]]
+name = "image-webp"
+version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "525e9ff3e1a4be2fbea1fdf0e98686a6d98b4d8f937e1bf7402245af1909e8c3"
+dependencies = [
+ "byteorder-lite",
+ "quick-error",
+]
+
+[[package]]
 name = "indexmap"
 version = "2.14.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1584,7 +1656,7 @@ checksum = "47d9d19d1d6efa0109d2f65ff4c85cddd50bd572e5a00127ab10987290bcefae"
 [[package]]
 name = "llrt_abort"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_async_hooks",
  "llrt_events",
@@ -1597,7 +1669,7 @@ dependencies = [
 [[package]]
 name = "llrt_assert"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_utils",
  "rquickjs",
@@ -1606,7 +1678,7 @@ dependencies = [
 [[package]]
 name = "llrt_async_hooks"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_hooking",
  "llrt_utils",
@@ -1617,7 +1689,7 @@ dependencies = [
 [[package]]
 name = "llrt_buffer"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "llrt_encoding",
@@ -1630,7 +1702,7 @@ dependencies = [
 [[package]]
 name = "llrt_build"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "rustc_version",
 ]
@@ -1638,7 +1710,7 @@ dependencies = [
 [[package]]
 name = "llrt_child_process"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "libc",
@@ -1654,7 +1726,7 @@ dependencies = [
 [[package]]
 name = "llrt_compression"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "brotli",
  "brotlic",
@@ -1665,7 +1737,7 @@ dependencies = [
 [[package]]
 name = "llrt_console"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_logging",
  "llrt_utils",
@@ -1675,7 +1747,7 @@ dependencies = [
 [[package]]
 name = "llrt_context"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_build",
  "llrt_utils",
@@ -1687,7 +1759,7 @@ dependencies = [
 [[package]]
 name = "llrt_crypto"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "chacha20poly1305",
  "crc32c",
@@ -1716,7 +1788,7 @@ dependencies = [
 [[package]]
 name = "llrt_dgram"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "llrt_buffer",
@@ -1731,7 +1803,7 @@ dependencies = [
 [[package]]
 name = "llrt_dns"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "either",
  "llrt_context",
@@ -1744,7 +1816,7 @@ dependencies = [
 [[package]]
 name = "llrt_dns_cache"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "hyper-util",
  "llrt_context",
@@ -1757,7 +1829,7 @@ dependencies = [
 [[package]]
 name = "llrt_encoding"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "base64-simd",
  "hex-simd",
@@ -1769,7 +1841,7 @@ dependencies = [
 [[package]]
 name = "llrt_events"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_utils",
  "rquickjs",
@@ -1779,7 +1851,7 @@ dependencies = [
 [[package]]
 name = "llrt_exceptions"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_utils",
  "rquickjs",
@@ -1788,7 +1860,7 @@ dependencies = [
 [[package]]
 name = "llrt_fetch"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "bytes",
  "either",
@@ -1822,7 +1894,7 @@ dependencies = [
 [[package]]
 name = "llrt_fs"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "either",
  "junction",
@@ -1838,7 +1910,7 @@ dependencies = [
 [[package]]
 name = "llrt_hooking"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_utils",
  "once_cell",
@@ -1848,7 +1920,7 @@ dependencies = [
 [[package]]
 name = "llrt_http"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "bytes",
  "http-body-util",
@@ -1866,7 +1938,7 @@ dependencies = [
 [[package]]
 name = "llrt_intl"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "jiff",
@@ -1877,7 +1949,7 @@ dependencies = [
 [[package]]
 name = "llrt_json"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "llrt_build",
@@ -1890,7 +1962,7 @@ dependencies = [
 [[package]]
 name = "llrt_logging"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "llrt_context",
@@ -1905,7 +1977,7 @@ dependencies = [
 [[package]]
 name = "llrt_navigator"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "rquickjs",
 ]
@@ -1913,7 +1985,7 @@ dependencies = [
 [[package]]
 name = "llrt_net"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "llrt_buffer",
@@ -1929,7 +2001,7 @@ dependencies = [
 [[package]]
 name = "llrt_numbers"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "itoa",
  "llrt_utils",
@@ -1940,7 +2012,7 @@ dependencies = [
 [[package]]
 name = "llrt_os"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "home",
  "libc",
@@ -1959,7 +2031,7 @@ dependencies = [
 [[package]]
 name = "llrt_path"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_utils",
  "memchr",
@@ -1969,7 +2041,7 @@ dependencies = [
 [[package]]
 name = "llrt_perf_hooks"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_events",
  "llrt_utils",
@@ -1979,7 +2051,7 @@ dependencies = [
 [[package]]
 name = "llrt_process"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "libc",
  "llrt_utils",
@@ -1989,7 +2061,7 @@ dependencies = [
 [[package]]
 name = "llrt_stream"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_buffer",
  "llrt_context",
@@ -2002,7 +2074,7 @@ dependencies = [
 [[package]]
 name = "llrt_stream_web"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_abort",
  "llrt_exceptions",
@@ -2013,7 +2085,7 @@ dependencies = [
 [[package]]
 name = "llrt_string_decoder"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_buffer",
  "llrt_encoding",
@@ -2024,7 +2096,7 @@ dependencies = [
 [[package]]
 name = "llrt_temporal"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "jiff",
  "llrt_utils",
@@ -2034,7 +2106,7 @@ dependencies = [
 [[package]]
 name = "llrt_timers"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_context",
  "llrt_hooking",
@@ -2047,7 +2119,7 @@ dependencies = [
 [[package]]
 name = "llrt_tls"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "once_cell",
  "rustls",
@@ -2058,7 +2130,7 @@ dependencies = [
 [[package]]
 name = "llrt_tty"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "libc",
  "llrt_utils",
@@ -2068,7 +2140,7 @@ dependencies = [
 [[package]]
 name = "llrt_url"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_utils",
  "rquickjs",
@@ -2078,7 +2150,7 @@ dependencies = [
 [[package]]
 name = "llrt_util"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_context",
  "llrt_encoding",
@@ -2091,7 +2163,7 @@ dependencies = [
 [[package]]
 name = "llrt_utils"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "half",
  "libc",
@@ -2107,7 +2179,7 @@ dependencies = [
 [[package]]
 name = "llrt_zlib"
 version = "0.9.0-beta"
-source = "git+https://github.com/awslabs/llrt?rev=89941ae1f4e07dbfe2c09bf89e5f6261906202d3#89941ae1f4e07dbfe2c09bf89e5f6261906202d3"
+source = "git+https://github.com/awslabs/llrt?rev=cebf676eaeedbf234b6f9a9b7e74ac46938ff27c#cebf676eaeedbf234b6f9a9b7e74ac46938ff27c"
 dependencies = [
  "llrt_buffer",
  "llrt_compression",
@@ -2170,6 +2242,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fa76a2c86f704bdb222d66965fb3d63269ce38518b83cb0575fca855ebb6316"
 dependencies = [
  "adler2",
+ "simd-adler32",
 ]
 
 [[package]]
@@ -2191,6 +2264,16 @@ dependencies = [
  "libc",
  "wasi",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "moxcms"
+version = "0.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bb85c154ba489f01b25c0d36ae69a87e4a1c73a72631fc6c0eb6dde34a73e44b"
+dependencies = [
+ "num-traits",
+ "pxfm",
 ]
 
 [[package]]
@@ -2404,6 +2487,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
 
 [[package]]
+name = "png"
+version = "0.18.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "60769b8b31b2a9f263dae2776c37b1b28ae246943cf719eb6946a1db05128a61"
+dependencies = [
+ "bitflags 2.13.2",
+ "crc32fast",
+ "fdeflate",
+ "flate2",
+ "miniz_oxide 0.8.9",
+]
+
+[[package]]
 name = "poly1305"
 version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2490,6 +2586,18 @@ checksum = "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9"
 dependencies = [
  "unicode-ident",
 ]
+
+[[package]]
+name = "pxfm"
+version = "0.1.30"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d55d956fa96f5ec02be2e13af0e20391a5aa83d6a074e3ad368959d0fab299ea"
+
+[[package]]
+name = "quick-error"
+version = "2.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a993555f31e5a609f617c12db6250dedcac1b0a85076912c436e6fc9b2c8e6a3"
 
 [[package]]
 name = "quick_cache"
@@ -3329,6 +3437,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "weezl"
+version = "0.1.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a28ac98ddc8b9274cb41bb4d9d4d5c425b6020c50c46f25559911905610b4a88"
+
+[[package]]
 name = "whoami"
 version = "2.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3765,4 +3879,19 @@ checksum = "0ef0a8027ec3ee71300ab3bcbcd0393f434aa72b91ca6d635a39941deae8eea0"
 dependencies = [
  "cc",
  "pkg-config",
+]
+
+[[package]]
+name = "zune-core"
+version = "0.5.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d56377fd46368984a170bc5aac5567e52ca5da874caa60bea39fcbca78fb658b"
+
+[[package]]
+name = "zune-jpeg"
+version = "0.5.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "27bc9d5b815bc103f142aa054f561d9187d191692ec7c2d1e2b4737f8dbd7296"
+dependencies = [
+ "zune-core",
 ]
