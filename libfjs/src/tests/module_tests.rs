@@ -440,7 +440,7 @@ fn test_module_resolver_node_prefix() {
 // Module Builder Tests
 // ============================================================================
 
-use crate::api::module::ModuleBuilder;
+use crate::api::module::{ModuleBuilder, NativeExtension};
 
 #[test]
 fn test_module_builder_new() {
@@ -464,5 +464,30 @@ fn test_module_builder_with_global() {
     test_with(|ctx| {
         let result = attachment.attach(&ctx);
         assert!(result.is_ok());
+    });
+}
+
+fn native_extension_poc_global(ctx: &rquickjs::Ctx<'_>) -> rquickjs::Result<()> {
+    let function = rquickjs::Function::new(ctx.clone(), |value: String| -> String {
+        format!("native:{value}")
+    })?;
+    ctx.globals().set("__fjs_native_poc", function)?;
+
+    Ok(())
+}
+
+#[test]
+fn test_module_builder_with_native_extension_global() {
+    let extension = NativeExtension::new().with_global(native_extension_poc_global);
+    let builder = ModuleBuilder::new().with_native_extension(extension);
+    let (_resolver, _loader, attachment) = builder.build();
+
+    test_with(|ctx| {
+        let result = attachment.attach(&ctx);
+        assert!(result.is_ok());
+
+        let value = ctx.eval::<String, _>("__fjs_native_poc('ok')");
+        assert!(value.is_ok());
+        assert_eq!(value.unwrap(), "native:ok");
     });
 }

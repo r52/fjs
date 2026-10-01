@@ -776,6 +776,7 @@ name = "fjs"
 version = "3.3.2"
 dependencies = [
  "anyhow",
+ "fjs_native_extensions",
  "flate2",
  "flutter_rust_bridge",
  "futures",
@@ -814,6 +815,15 @@ dependencies = [
  "llrt_zlib",
  "rquickjs",
  "tokio",
+]
+
+[[package]]
+name = "fjs_native_extensions"
+version = "0.1.3"
+source = "git+https://github.com/r52/fjs_native_extensions.git?branch=main#16f6a1ad4a6074604013dc63cc5e65d737794a09"
+dependencies = [
+ "linkme",
+ "rquickjs",
 ]
 
 [[package]]
@@ -1543,6 +1553,26 @@ checksum = "d7c4b02199fee7c5d21a5ae7d8cfa79a6ef5bb2fc834d6e9058e89c825efdc55"
 dependencies = [
  "cfg-if",
  "windows-link 0.2.1",
+]
+
+[[package]]
+name = "linkme"
+version = "0.3.37"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3045e122bd98aef8ec3ad58ce84f0791f64e70163d1a02710af4aa11a4d54cc5"
+dependencies = [
+ "linkme-impl",
+]
+
+[[package]]
+name = "linkme-impl"
+version = "0.3.37"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77060ebe535362c3da75682cd17b0431017b6e7c5661e714fc69a7ad017d1301"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 3.0.6",
 ]
 
 [[package]]
