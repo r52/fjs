@@ -674,6 +674,11 @@ impl JsBuiltinOptions {
             builder = builder.with_global(llrt_exceptions::init);
         }
         if self.fetch.unwrap_or(false) {
+            // llrt defaults to HTTP/1.1-only ALPN when both versions are compiled in.
+            // Offer h2 with HTTP/1.1 fallback like a browser; CDN bot checks challenge
+            // browser user agents that arrive over HTTP/1.1. Must run before
+            // `llrt_fetch::init` forces the process-wide client.
+            llrt_http::set_http_version(llrt_http::HttpVersion::Http2);
             builder = builder.with_global(llrt_fetch::init);
         }
         if self.fs.unwrap_or(false) {

@@ -51,5 +51,8 @@ mod bytecode_support;
 mod frb_generated;
 mod runtime;
 
+#[doc(hidden)]
+pub use gagaku_fjs_native_module as _fjs_link_gagaku_native_module;
+
 #[cfg(test)]
 mod tests;

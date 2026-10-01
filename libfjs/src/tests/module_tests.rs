@@ -249,6 +249,21 @@ fn test_builtin_options_none_to_module_builder() {
     // Should not panic
 }
 
+#[test]
+fn test_builtin_options_fetch_negotiates_http2() {
+    use crate::api::source::JsBuiltinOptions;
+
+    let options = JsBuiltinOptions {
+        fetch: Some(true),
+        ..JsBuiltinOptions::none()
+    };
+    let _builder = options.to_module_builder();
+    assert!(matches!(
+        llrt_http::get_http_version(),
+        llrt_http::HttpVersion::Http2
+    ));
+}
+
 // ============================================================================
 // Dynamic Module Resolver/Loader Tests
 // ============================================================================
